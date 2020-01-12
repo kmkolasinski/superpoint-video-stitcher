@@ -2,8 +2,17 @@
 
 Fast video sequence stitching using SuperPoint [1] keypoint extractor.
 
+# Requirements
+
+See `requirements.txt`, `python>=3.6.6` is required.
+
 # Usage:
 
+Convert video to images:
+```bash
+ffmpeg -i video.mp4 %06d.jpg -hide_banner
+```
+Check stitching in notebook
 ```python
 from lib.keypoint_extractors import SuperPointExtractor, Keypoints
 from lib.io import ImagesStreamer
