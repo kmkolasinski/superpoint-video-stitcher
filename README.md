@@ -41,3 +41,14 @@ image = stitcher.stitch_left_right_sequence(streamer.reverse())
 * Model weights comes from: https://github.com/mmmfarrell/SuperPoint/blob/master/pretrained_models/sp_v5.tgz
 * Tensorflow SuperPoint implementation: https://github.com/rpautrat/SuperPoint
 * Original SuperPoint implementation: https://github.com/MagicLeapResearch/SuperPointPretrainedNetwork
+
+# Jupyter notebook tqdm widget
+
+In order to see nice progress bar in the notebook one need to install 
+following packages and extenstions
+
+```bash
+conda install nodejs
+jupyter nbextension enable --py widgetsnbextension
+jupyter labextension install @jupyter-widgets/jupyterlab-manager
+```
