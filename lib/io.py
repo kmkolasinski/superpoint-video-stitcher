@@ -1,5 +1,5 @@
 from glob import glob
-from typing import Tuple, Optional
+from typing import Tuple, Optional, Type
 import cv2
 import numpy as np
 from natsort import natsorted
@@ -33,8 +33,10 @@ class ImagesStreamer:
         self.listing = []
         self.init()
 
-    def copy(self) -> 'ImagesStreamer':
-        return ImagesStreamer(
+    def copy(self, base_type: Type["ImagesStreamer"] = None) -> 'ImagesStreamer':
+        if base_type is None:
+            base_type = ImagesStreamer
+        return base_type(
             images_glob=self.images_glob, skip_frames=self.skip_frames, max_frames=self.max_frames
         )
 

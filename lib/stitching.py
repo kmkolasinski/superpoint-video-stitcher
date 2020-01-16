@@ -50,8 +50,8 @@ class VideoStitcher:
         self, streamer: ImagesStreamer, use_homography: bool = False
     ) -> np.ndarray:
         """
-        Stitching which assumes left-to-right planar motion. This function
-        will apply additional image correction
+        Stitching which assumes top-to-bottom planar motion. This function
+        will apply additional image correction which uses this assumption.
         Args:
             streamer:
             use_homography: match images by homography relationship. If
@@ -62,6 +62,33 @@ class VideoStitcher:
         return stitch_left_right_scan(
             streamer, self.extractor, self.nn_thresh, use_homography=use_homography
         )
+
+    def stitch_top_bottom_sequence(
+        self, streamer: ImagesStreamer, use_homography: bool = False
+    ) -> np.ndarray:
+        """
+        Stitching which assumes top-to-bottom planar motion. This function
+        will apply additional image correction which uses this assumption.
+        Args:
+            streamer:
+            use_homography: match images by homography relationship. If
+                False Affine transform is used.
+        Returns:
+            stitched image
+        """
+
+        class _RotatedStreamer(ImagesStreamer):
+            def next_frame(self):
+                image, status = super().next_frame()
+                if image is not None:
+                    image = np.transpose(image, [1, 0, 2])
+                    image = image[::-1]
+                return image, status
+
+        image = stitch_left_right_scan(
+            streamer.copy(_RotatedStreamer), self.extractor, self.nn_thresh, use_homography=use_homography
+        )
+        return np.transpose(image[::-1], [1, 0, 2])
 
     def stitch_sequence(
         self,

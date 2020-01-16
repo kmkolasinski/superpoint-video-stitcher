@@ -34,6 +34,9 @@ image = stitcher.stitch_left_right_sequence(streamer.reset())
 
 # horizontal movement (from right to left <== )
 image = stitcher.stitch_left_right_sequence(streamer.reverse())
+
+# top - bottom
+image = stitcher.stitch_top_bottom_sequence(streamer.reset())
 ```
 
 # References 
