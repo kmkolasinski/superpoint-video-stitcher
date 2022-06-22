@@ -1,7 +1,7 @@
 tensorflow==1.15
 tqdm==4.41.1
 ipywidgets==7.5.1
-numpy==1.16.4
+numpy==1.22.0
 opencv-contrib-python==3.4.2.17
 opencv-python==3.4.2.17
 Pillow==6.2.0
